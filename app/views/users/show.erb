@@ -1,0 +1,26 @@
+<div id="profile-info">
+<h2>Welcome, <%= @user.username %>!</h2>
+  <p class="profile">Username: <%= @user.username %></p>
+  <p class="profile">Email: <%= @user.email %></p>
+</div>
+
+<a href="/users/<%= @user.id %>/items/new">Add New Item</a>
+
+<div class="auction-container">
+  <% @user.items.each do |item| %>
+    <ol>
+      <ul>
+        <li>Item Name: <a href="/users/<%= @user.id %>/items/<%= item.id %>"> <%= item.name %></li>
+      </ul>
+      <span>
+        <a href="/users/<%= @user.id %>/items/<%= item.id %>/edit">Update Item</a>
+      </span>
+      <span>
+        <form action="/users/<%= @user.id %>/items/<%= item.id %>" method="post">
+          <input type="hidden" name="_method" value="DELETE" />
+          <input type="submit" value="Delete Item"/>
+        </form>
+      </span>
+    </ol>
+  <% end %>
+</div>

@@ -1,0 +1,23 @@
+<h1><%= @item.name %></h1>
+<div class="item-description">
+<ul>
+  <li>Condition: <%= @item.condition %></li>
+  <li>Description: <%= @item.description %></li>
+  <li>End Time: <%= @item.end_time %></li>
+  <li>Listing Author: <a href="/users/<%= @item.user.id %>"><%= @item.user.username %></a></li>
+</li>
+</ul>
+</div>
+
+<% if session[:user_id] %>
+  <div class="bidding">
+    <h1>Bidding</h1>
+    <p>Number of bidders: <%= @item.bid_count %></p>
+    <p>Place a bid for this item:</p>
+    <form action="/users/<%= @item.user.id %>/items/<%= @item.id %>/bid" method="post">
+      <input type="hidden" name="_method" value="PUT" />
+      <input type="number" name="bid"/>
+      <input type="submit" value="BID"/>
+    </form>
+  </div>
+<% end %>
